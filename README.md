@@ -1,7 +1,7 @@
 # Yuuki Chess Engine
 
 **Version:** 1.0  
-**Author:** [Eryx/RJ](https://facebook.com/profile.php?id=61590704998111)
+**Author:** [Eryx/RJ](https://facebook.com/profile.php?id=61590704998111)    
 **License:** MIT  
 
 Yuuki is a UCI-compatible chess engine written in JavaScript (Web Worker) and C++17. It features an advanced evaluation function, sophisticated search algorithms, and a modular codebase designed for clarity and extensibility. There's a release here compatible with arm64-v8a. Feel free to compile it to be compatible with your devices!
