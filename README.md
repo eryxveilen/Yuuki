@@ -25,7 +25,7 @@ You can tweak its gameplay with 50+ controls on engine playstyle, making it very
 **"Manage Chess Engines"** > **"Set Options"**
 
 ---
-### ALTERNATIVELY, YOU CAN USE THIS ENGINE ON [Yuuki App on Base44.com](https://yuuki.base44.app)
+### ALTERNATIVELY, YOU CAN USE THIS ENGINE ON [Yuuki App on Base44.com](https://yuuki-ch.base44.app)
 **Notice:** There's a bug in this app because it's not handled properly by the code in the web, causing it to generate illegal move (but very rare case).
 ---
 
