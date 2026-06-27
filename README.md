@@ -1,6 +1,6 @@
 # Yuuki Chess Engine
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Author:** [Eryx/RJ](https://facebook.com/profile.php?id=61590704998111)    
 **License:** MIT  
 
