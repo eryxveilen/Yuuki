@@ -1,0 +1,77 @@
+name: Build and Release Yuuki Engine
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers when you push a tag like v1.1, v1.2, etc.
+
+jobs:
+  # 1. Build for Windows (x64)
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile for Windows
+        run: |
+          g++ -std=c++17 -O3 -static -pthread src/*.cpp -o yuuki.exe
+      - name: Upload Binary (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: yuuki-windows
+          path: yuuki.exe
+
+  # 2. Build for Linux (x64)
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile for Linux
+        run: |
+          g++ -std=c++17 -O3 -pthread src/*.cpp -o yuuki
+      - name: Upload Binary (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: yuuki-linux
+          path: yuuki
+
+  # 3. Build for Android (arm64-v8a) using NDK
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Android NDK
+        run: |
+          wget https://dl.google.com/android/repository/android-ndk-r26c-linux.zip
+          unzip android-ndk-r26c-linux.zip
+          echo "ANDROID_NDK_ROOT=$PWD/android-ndk-r26c" >> $GITHUB_ENV
+      - name: Compile for Android (arm64)
+        run: |
+          export PATH=$ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin:$PATH
+          $ANDROID_NDK_ROOT/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang++ -std=c++17 -O3 -static-libstdc++ -pthread src/*.cpp -o yuuki_android
+      - name: Upload Binary (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: yuuki-android
+          path: yuuki_android
+
+  # 4. Create the Official GitHub Release and attach all binaries
+  create-release:
+    needs: [build-windows, build-linux, build-android]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required to create releases
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download all compiled binaries
+        uses: actions/download-artifact@v4
+        with:
+          path: binaries
+      - name: Create Release and Upload Assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            binaries/yuuki-windows/yuuki.exe
+            binaries/yuuki-linux/yuuki
+            binaries/yuuki-android/yuuki_android
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
