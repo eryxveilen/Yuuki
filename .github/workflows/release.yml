@@ -1,12 +1,15 @@
 name: Build and Release Yuuki Engine
 
 on:
+  # Manual trigger (you can click "Run workflow" in the Actions tab)
+  workflow_dispatch:
+  # Automatic trigger when a tag is pushed
   push:
     tags:
       - 'v*'
 
 jobs:
-  # Windows (x64) - uses MinGW on Windows runner
+  # Windows (x64)
   build-windows:
     runs-on: windows-latest
     steps:
@@ -39,13 +42,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Compile for macOS
         run: |
-          g++ -std=c++17 -O3 -pthread -Iinclude src/*.cpp -o yuuki
+          g++ -std=c++17 -O3 -pthread -Iinclude src/*.cpp -o yuuki-macos
       - uses: actions/upload-artifact@v4
         with:
           name: yuuki-macos
-          path: yuuki
+          path: yuuki-macos
 
-  # Android (arm64-v8a) - using NDK directly
+  # Android (arm64-v8a)
   build-android:
     runs-on: ubuntu-latest
     steps:
@@ -55,7 +58,7 @@ jobs:
           wget -q https://dl.google.com/android/repository/android-ndk-r26c-linux.zip
           unzip -q android-ndk-r26c-linux.zip
           echo "NDK=$PWD/android-ndk-r26c" >> $GITHUB_ENV
-      - name: Compile for Android arm64-v8a
+      - name: Compile for Android
         run: |
           $NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang++ \
             -std=c++17 -O3 -static-libstdc++ -pthread -Iinclude src/*.cpp -o yuuki-android
@@ -64,7 +67,7 @@ jobs:
           name: yuuki-android
           path: yuuki-android
 
-  # Create the GitHub Release and attach all binaries
+  # Create Release
   create-release:
     needs: [build-windows, build-linux, build-macos, build-android]
     runs-on: ubuntu-latest
@@ -81,7 +84,7 @@ jobs:
           mkdir release
           cp binaries/yuuki-windows/yuuki.exe release/yuuki-win-x64.exe
           cp binaries/yuuki-linux/yuuki release/yuuki-linux-x64
-          cp binaries/yuuki-macos/yuuki release/yuuki-macos-x64
+          cp binaries/yuuki-macos/yuuki-macos release/yuuki-macos-x64
           cp binaries/yuuki-android/yuuki-android release/yuuki-android-arm64-v8a
       - name: Create Release
         uses: softprops/action-gh-release@v1
