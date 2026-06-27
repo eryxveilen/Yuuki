@@ -1,0 +1,8 @@
+Contempt=35
+KingSafetyWeight=50
+ThreatWeight=15
+TrappedPiecePenalty=30
+KingTropismWeight=8
+AttackZoneWeight=20
+DiscoveryThreatBonus=30
+InitiativeWeight=15
