@@ -1,15 +1,12 @@
 name: Build and Release Yuuki Engine
 
 on:
-  # Manual trigger (you can click "Run workflow" in the Actions tab)
   workflow_dispatch:
-  # Automatic trigger when a tag is pushed
   push:
     tags:
       - 'v*'
 
 jobs:
-  # Windows (x64)
   build-windows:
     runs-on: windows-latest
     steps:
@@ -22,7 +19,6 @@ jobs:
           name: yuuki-windows
           path: yuuki.exe
 
-  # Linux (x64)
   build-linux:
     runs-on: ubuntu-latest
     steps:
@@ -35,7 +31,6 @@ jobs:
           name: yuuki-linux
           path: yuuki
 
-  # macOS (x64)
   build-macos:
     runs-on: macos-latest
     steps:
@@ -48,7 +43,6 @@ jobs:
           name: yuuki-macos
           path: yuuki-macos
 
-  # Android (arm64-v8a)
   build-android:
     runs-on: ubuntu-latest
     steps:
@@ -67,7 +61,6 @@ jobs:
           name: yuuki-android
           path: yuuki-android
 
-  # Create Release
   create-release:
     needs: [build-windows, build-linux, build-macos, build-android]
     runs-on: ubuntu-latest
