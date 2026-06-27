@@ -1,9 +1,10 @@
 # Yuuki Chess Engine Makefile
-# Supports cross-compilation via CROSS_COMPILE variable
-# Usage: make (defaults to native) or make CROSS_COMPILE=aarch64-linux-gnu-
+# Usage: make (native) or make CXX=aarch64-linux-gnu-g++ (cross-compile)
 
-CXX = $(CROSS_COMPILE)g++
-CXXFLAGS = -std=c++17 -O3 -flto -pthread -Wall -Wextra
+CXX = g++
+CXXFLAGS = -std=c++17 -O3 -flto -pthread -Wall -Wextra -Iinclude
+LDFLAGS = -pthread
+
 TARGET = yuuki
 SOURCES = $(wildcard src/*.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
@@ -11,13 +12,12 @@ OBJECTS = $(SOURCES:.cpp=.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJECTS) $(TARGET)
-	rm -f src/*.o
 
 .PHONY: all clean
