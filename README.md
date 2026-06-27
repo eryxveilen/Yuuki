@@ -27,9 +27,9 @@ Get pre-compiled binaries for your platform:
 
 ### Android (arm64-v8a)
 
-1. Download [Yuuki.zip](https://github.com/user-attachments/files/29368204/Yuuki.zip) and [DroidFish.apk](https://f-droid.org/en/packages/org.petero.droidfish/)
-2. Install DroidFish and extract Yuuki.zip
-3. Move the extracted binary to: `Droidfish/uci/`
+1. Download [yuuki-android-arm64-v8a](https://github.com/eryxveilen/yuuki-chess-engine/releases/download/v1.1/yuuki-android-arm64-v8a) and [DroidFish.apk](https://f-droid.org/en/packages/org.petero.droidfish/)
+2. Install DroidFish
+3. Move the yuuki-android-arm64-v8a to: `Droidfish/uci/`
 4. Open DroidFish → Left Toolbar → **"Manage Chess Engines"** → **"Select Engines"** → **"Yuuki"**
 
 ### Web Interface
