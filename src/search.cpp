@@ -8,6 +8,7 @@
 #include "tt.h"
 #include "draw.h"
 #include "uci.h"
+#include "board.h"
 #include <algorithm>
 #include <random>
 #include <numeric>
