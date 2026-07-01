@@ -8,7 +8,7 @@ Yuuki is a UCI-compatible chess engine written in C++17. It features an advanced
 
 ---
 
-## 📥 Downloads
+## 📦 Version
 
 ### Latest Release: v1.1
 
@@ -18,6 +18,15 @@ Get pre-compiled binaries for your platform:
 - **[Linux (x64)](https://github.com/eryxveilen/yuuki-chess-engine/releases)** – For Linux systems
 - **[macOS (x64)](https://github.com/eryxveilen/yuuki-chess-engine/releases)** – For macOS
 - **[Windows (x64)](https://github.com/eryxveilen/yuuki-chess-engine/releases)** – For Windows
+
+### Web Snapshots
+
+| Snapshot | Description | Link |
+|----------|-------------|------|
+| **Main** | Full preset personalities (Sniper, Super GM, Solid Defender, Pawn Master) | [Yuuki App on Base44](https://yuuki-ch.base44.app) |
+| **v1.2 Snapshot** | Engine resigns logic update — improved human-like behavior | [Snapshot v1.2](https://yuuki-ch-snapv1-2.base44.app/) |
+
+> ⚠️ *Known issues fixed thanks to [Anne](https://github.com/sarinaanneperez-dev)'s contribution via Base44 Builder+ plan.*
 
 ---
 
@@ -29,13 +38,6 @@ Get pre-compiled binaries for your platform:
 2. Install DroidFish
 3. Move the yuuki-android-arm64-v8a to: `Droidfish/uci/`
 4. Open DroidFish → Left Toolbar → **"Manage Chess Engines"** → **"Select Engines"** → **"Yuuki"**
-
-### Web Interface
-
-Use [Yuuki App on Base44.com](https://yuuki-ch.base44.app) with preset personalities (Sniper, Super GM, Solid Defender, Pawn Master).    
-Use the [Snapshot v1.2](https://yuuki-ch-snapv1-2.base44.app/) with engine resigns update.
-
-> ⚠️The *known issues* are fixed thanks to [Anne](https://github.com/sarinaanneperez-dev)'s indirect contribution.
 
 ---
 
